@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+body {
+  background-color: #0C0C16 !important;
+}
+
+* {
+  text-align: start;
+  font-family: "Poppins";
+  color: #fff;
+}
+
+body p {
+  margin: 0;
+}
+
+.card-bg {
+  height: 600px;
+  background: #121221;
+  /* Shadow/Card/10% */
+  box-shadow: 0px 50px 100px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+}
+
+@media (max-width: 576px) {
+  .card-bg {
+    border-radius: 0px;
+    height: 100%;
+  }
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.indicator {
+  height: 5px;
+  flex: 1 0 0;
+  background-color: #3eb6ae;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 6px; /* Set the width of the scrollbar */
+  position: absolute;
+  top: 0;
+  right: 10px;
+  rotate: 24deg;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2); /* Set the background color of the track */
+  width: 4px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #FFF;
+  width: 5px !important;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6); /* Set the color of the scrollbar thumb on hover */
+}
+
+.content .back {
+  width: 38px;
+  height: 38px;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+}
+
+.title h1 {
+  background: linear-gradient(-90deg, #3eb6ae, #845ecc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-size: 2.2rem;
+  letter-spacing: -0.64px;
+}
+
+.title p {
+  font-size: .9rem;
+}
+
+.service .logo {
+  width: 24px;
+  height: 24px;
+}
+
+.service .next {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  height: 20px;
+  width: 20px;
+}
+
+.service h3 {
+  line-height: 160%;
+  letter-spacing: -0.4px;
+}
+
+.service {
+  gap: 8px;
+  border-radius: 24px;
+  background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
+  box-shadow: 0px 4px 40px 0px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: 300ms ease-in-out;
+}
+
+.service:hover {
+  scale: 1.04;
+  box-shadow: 0px 0px 12px 0px rgb(62, 182, 174);
+  background: radial-gradient(ellipse at top left, rgba(88, 255, 244, 0.2), rgba(255, 255, 255, 0.1));
+}
+.options .togglesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 10px;
+}
+
+.option {
+  cursor: pointer;
+}
+
+
+.togglesList .option {
+  font-size: 0.8rem;
+  line-height: 150%;
+  letter-spacing: 0.2px;
+  align-self: center;
+}
+
+.option .checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+  border: 1px solid #fff;
+
+  padding: 2.4px;
+}
+
+.option .checkbox .checked {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background: #3eb6ae;
+}
+
+
+.button {
+  width: 100%;
+  display: flex;
+  padding: 12px 0px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #3EB6AE;
+  cursor: pointer;
+
+  color: #FFF;
+  font-size: 0.8rem; /* Updated from 14px */
+  font-weight: 500;
+  line-height: 150%;
+  border: none;
+  transition: 300ms ease-in-out;
+}
+
+.button:hover {
+  scale: 1.02;
+  box-shadow: 0px 0px 20px 0px rgba(88, 255, 244, 0.6);
+}
+
+.containersList .option {
+  width: 100%;
+  height: max-content;
+  background: #2b2a39;
+  font-size: .8rem;
+  line-height: 150%;
+  letter-spacing: -0.32px;
+}
+
+.option .divider {
+  width: 1px;
+  height: 40px;
+  background-color: #fff;
+}
+
+.option .netvalue {
+  color: #3eb6ae;
+}
+
+
+.form-group input:not([type="checkbox"]) {
+  padding: 14px 18px;
+
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: none;
+  font-size: 0.75rem;
+}
+
+.form-group.form-check {
+  height: fit-content;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 150%;
+}
