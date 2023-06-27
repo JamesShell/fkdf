@@ -223,3 +223,17 @@ body p {
   font-weight: 500;
   line-height: 150%;
 }
+
+
+.from-wrapper {
+  height: 670px;
+}
+
+.from-wrapper > div {
+  height: 100%;
+}
+@media (max-width: 992px) {
+  .from-wrapper {
+    height: 100vh;
+  }
+}

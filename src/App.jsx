@@ -18,10 +18,10 @@ function App() {
     <main>
       <section className="contentwrapper container p-sm-0">
         <div className="row">
-          <div className="col-md-6 col-12 p-0">
+          <div className="col-lg-6 col-12 p-0">
             <Forum animate={isAnimating} setAnimate={setIsAnimating}/>
           </div>
-          <div className="col-md-6 col-12 p-0">
+          <div className="col-lg-6 col-12 p-0 d-none d-lg-block">
             <Phone animate={isAnimating} setAnimate={setIsAnimating}/>
           </div>
         </div>

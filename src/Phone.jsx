@@ -13,31 +13,31 @@ function Phone({animate, setAnimate}) {
                 <Stand
         radiusTop={3}
         radiusBottom={3}
-        height={.3}
-        radialSegments={32}
+        height={.12}
+        radialSegments={100}
         heightSegments={1}
-        color={0xffffff} // Green color
-        position={[0, -2.8, 0]}
+        color={0x0C0C16} // Green color
+        position={[0, -2.6, 0]}
         rotation={[-.3, 0, 0]}
       />
       <Stand
         radiusTop={2.8}
         radiusBottom={3}
-        height={.35}
-        radialSegments={32}
+        height={.16}
+        radialSegments={100}
         heightSegments={1}
-        color={0xffffff} // Green color
-        position={[0, -2.8, 0]}
+        color={0x0C0C16} // Green color
+        position={[0, -2.6, 0]}
         rotation={[-.3, 0, 0]}
       />
       <Stand
         radiusTop={2}
         radiusBottom={3}
-        height={.4}
-        radialSegments={32}
+        height={.18}
+        radialSegments={100}
         heightSegments={1}
-        color={0xffffff} // Green color
-        position={[0, -2.8, 0]}
+        color={0x0C0C16} // Green color
+        position={[0, -2.6, 0]}
         rotation={[-.3, 0, 0]}
       />
               </Canvas>

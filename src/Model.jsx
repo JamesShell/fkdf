@@ -71,7 +71,24 @@ export function Stand ({ radiusTop, radiusBottom, height, radialSegments, height
 
   useEffect(() => {
     const geometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments);
-    const material = new THREE.MeshStandardMaterial({ color });
+    // reflective material light bounce on edges
+    const material = new THREE.MeshPhysicalMaterial({
+      metalness: 1, // Reflective material
+      roughness: 0, // Smooth surface
+      side: THREE.DoubleSide // Render both sides of the faces
+    });
+
+    //remove a
+    // Create lighting area for the cylinder
+    const light = new THREE.PointLight(0xffffff, 10, 300);
+    light.position.set(4, 4, 0);
+    const light2 = new THREE.PointLight(0xffffff, 10, 300);
+    light2.position.set(-4, 4, 0);
+    cylinderRef.current.add(light2);
+    cylinderRef.current.add(light);
+
+
+
     const cylinderMesh = new THREE.Mesh(geometry, material);
 
     cylinderMesh.position.set(0, height / 2, 0);

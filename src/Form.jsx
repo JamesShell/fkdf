@@ -1,5 +1,161 @@
 import React, { useEffect, useState } from "react";
 
+const Forum = ({ animate, setAnimate }) => {
+  const [stepIndex, setStepIndex] = useState(0);
+    const [serviceIndex, setServiceIndex] = useState(0);
+    const [choiceIndex, setChoiceIndex] = useState(0);
+  
+    const services = [
+      {
+        title: "Router (4G- 5G - custom of date)",
+        description:
+          "Got it, so a mix of performance and price. What will you regularly use your phone for?",
+        image: "icons/router (1) 1.svg",
+        optionText: "Speed",
+        options: [
+          "4G ( Unlimited )",
+          "5G ( Unlimited )",
+          "2GB",
+          "5GB",
+          "10GB",
+          "50GB",
+          "100GB",
+          "300GB",
+          "600GB",
+        ],
+      },
+      {
+        title: "Fiber (Speed)",
+        description:
+          "Got it, so a mix of performance and price. What will you regularly use your phone for?",
+        image: "icons/optical-fiber 1.svg",
+        optionText: "Speed",
+        options: ["1", "2", "3"],
+      },
+      {
+        title: "SIM (package) & number of lines",
+        description: "",
+        image: "icons/simcard.svg",
+        optionText: "Choose the best plan for you",
+        optionsData: [
+          {
+            capacity: 100,
+            onNetMin: 2411,
+            offNetMin: 425,
+            onNetSMS: 5362,
+            offNetSMS: 632,
+            price: 2.62,
+          },
+          {
+            capacity: 100,
+            onNetMin: 2411,
+            offNetMin: 425,
+            onNetSMS: 5362,
+            offNetSMS: 632,
+            price: 2.62,
+          },
+          {
+            capacity: 100,
+            onNetMin: 2411,
+            offNetMin: 425,
+            onNetSMS: 5362,
+            offNetSMS: 632,
+            price: 2.62,
+          },
+        ],
+        outerElement: (
+          <div className="form-group mb-3">
+            <label htmlFor="exampleTextField">How many lines do you want?</label>
+            <input
+              type="text"
+              className="form-control"
+              id="exampleTextField"
+              placeholder="Enter text"
+            />
+          </div>
+        ),
+      },
+      {
+        title: "Transfer to another operator",
+        description:
+          "Got it, so a mix of performance and price. What will you regularly use your phone for?",
+        image: "icons/transfer.svg",
+        optionText: "Speed",
+        options: ["1", "2", "3"],
+      },
+    ];
+  
+    const steps = [
+      {
+        title: "Tygo business",
+        description:
+          "Got it, so a mix of performance and price. What will you regularly use your phone for?",
+        child: () => (
+          <Services
+            services={services}
+            stepIndex={stepIndex}
+            setStepIndex={setStepIndex}
+            setServiceIndex={setServiceIndex}
+          />
+        ),
+      },
+      {
+        title: services[serviceIndex].title,
+        description: services[serviceIndex].description,
+        child: () => (
+          <ServiceOptions
+            stepIndex={stepIndex}
+            setStepIndex={setStepIndex}
+            choiceIndex={choiceIndex}
+            setChoiceIndex={setChoiceIndex}
+            serviceIndex={serviceIndex}
+            services={services}
+          />
+        ),
+      },
+      {
+        title: "Tygo business",
+        description:
+          "Got it, so a mix of performance and price. What will you regularly use your phone for?",
+        child: () => <Login stepIndex={stepIndex} setStepIndex={setStepIndex} />,
+      },
+      {
+        child: () => (
+          <div className="d-flex h-100 align-items-end">
+            <div className="pb-5 fs-4 text-center">
+              We will contact with you Soon ( Order.Number : 324432 )
+            </div>
+          </div>
+        ),
+      },
+    ];
+    
+    const [innerComponent, setInnerComponent] = useState(null);
+  
+    useEffect(() => {
+      setInnerComponent(steps[stepIndex].child);
+    }, [stepIndex, choiceIndex]);
+  
+    useEffect(() => {
+      setAnimate(true);
+    }, [stepIndex])
+  
+    return (
+      <div className="from-wrapper">
+      <div className="card-bg d-flex p-4 flex-column align-items-start row-gap-3 overflow-x-hidden overflow-y-auto">
+                <Indicators active={stepIndex} length={3} />
+                {innerComponent && (
+                  <InnerContent
+                    {...steps[stepIndex]}
+                    stepIndex={stepIndex}
+                    setStepIndex={setStepIndex}
+                    child={innerComponent}
+                  />
+                )}
+              </div>
+      </div>
+    );
+    }
 const CheckBox = ({ checked }) => {
     return (
       <div className="checkbox">
@@ -259,161 +415,6 @@ const CheckBox = ({ checked }) => {
     );
   };
 
-  const Forum = ({ animate, setAnimate }) => {
-const [stepIndex, setStepIndex] = useState(0);
-  const [serviceIndex, setServiceIndex] = useState(0);
-  const [choiceIndex, setChoiceIndex] = useState(0);
-
-  const services = [
-    {
-      title: "Router (4G- 5G - custom of date)",
-      description:
-        "Got it, so a mix of performance and price. What will you regularly use your phone for?",
-      image: "icons/router (1) 1.svg",
-      optionText: "Speed",
-      options: [
-        "4G ( Unlimited )",
-        "5G ( Unlimited )",
-        "2GB",
-        "5GB",
-        "10GB",
-        "50GB",
-        "100GB",
-        "300GB",
-        "600GB",
-      ],
-    },
-    {
-      title: "Fiber (Speed)",
-      description:
-        "Got it, so a mix of performance and price. What will you regularly use your phone for?",
-      image: "icons/optical-fiber 1.svg",
-      optionText: "Speed",
-      options: ["1", "2", "3"],
-    },
-    {
-      title: "SIM (package) & number of lines",
-      description: "",
-      image: "icons/simcard.svg",
-      optionText: "Choose the best plan for you",
-      optionsData: [
-        {
-          capacity: 100,
-          onNetMin: 2411,
-          offNetMin: 425,
-          onNetSMS: 5362,
-          offNetSMS: 632,
-          price: 2.62,
-        },
-        {
-          capacity: 100,
-          onNetMin: 2411,
-          offNetMin: 425,
-          onNetSMS: 5362,
-          offNetSMS: 632,
-          price: 2.62,
-        },
-        {
-          capacity: 100,
-          onNetMin: 2411,
-          offNetMin: 425,
-          onNetSMS: 5362,
-          offNetSMS: 632,
-          price: 2.62,
-        },
-      ],
-      outerElement: (
-        <div className="form-group mb-3">
-          <label htmlFor="exampleTextField">How many lines do you want?</label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleTextField"
-            placeholder="Enter text"
-          />
-        </div>
-      ),
-    },
-    {
-      title: "Transfer to another operator",
-      description:
-        "Got it, so a mix of performance and price. What will you regularly use your phone for?",
-      image: "icons/transfer.svg",
-      optionText: "Speed",
-      options: ["1", "2", "3"],
-    },
-  ];
-
-  const steps = [
-    {
-      title: "Tygo business",
-      description:
-        "Got it, so a mix of performance and price. What will you regularly use your phone for?",
-      child: () => (
-        <Services
-          services={services}
-          stepIndex={stepIndex}
-          setStepIndex={setStepIndex}
-          setServiceIndex={setServiceIndex}
-        />
-      ),
-    },
-    {
-      title: services[serviceIndex].title,
-      description: services[serviceIndex].description,
-      child: () => (
-        <ServiceOptions
-          stepIndex={stepIndex}
-          setStepIndex={setStepIndex}
-          choiceIndex={choiceIndex}
-          setChoiceIndex={setChoiceIndex}
-          serviceIndex={serviceIndex}
-          services={services}
-        />
-      ),
-    },
-    {
-      title: "Tygo business",
-      description:
-        "Got it, so a mix of performance and price. What will you regularly use your phone for?",
-      child: () => <Login stepIndex={stepIndex} setStepIndex={setStepIndex} />,
-    },
-    {
-      child: () => (
-        <div className="d-flex h-100 align-items-end">
-          <div className="pb-5 fs-4 text-center">
-            We will contact with you Soon ( Order.Number : 324432 )
-          </div>
-        </div>
-      ),
-    },
-  ];
-
-  // const InnerComponent = steps[stepIndex].child;
-
-  const [innerComponent, setInnerComponent] = useState(null);
-
-  useEffect(() => {
-    setInnerComponent(steps[stepIndex].child);
-  }, [stepIndex, choiceIndex]);
-
-  useEffect(() => {
-    setAnimate(true);
-  }, [stepIndex])
-
-  return (
-    <div className="card-bg d-flex p-4 flex-column align-items-start row-gap-3 overflow-x-hidden overflow-y-auto min-vh-100">
-              <Indicators active={stepIndex} length={3} />
-              {innerComponent && (
-                <InnerContent
-                  {...steps[stepIndex]}
-                  stepIndex={stepIndex}
-                  setStepIndex={setStepIndex}
-                  child={innerComponent}
-                />
-              )}
-            </div>
-  );
-  }
+ 
 
   export default Forum;
