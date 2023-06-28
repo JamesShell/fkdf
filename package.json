@@ -5,6 +5,7 @@
     "homepage": ".",
     "dependencies": {
         "@react-spring/three": "^9.7.2",
+        "@react-three/drei": "^9.77.4",
         "@react-three/fiber": "^8.13.3",
         "bootstrap": "^5.3.0",
         "node-sass": "^7.0.3",
@@ -40,5 +41,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "typescript": "^5.1.5"
     }
 }

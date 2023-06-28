@@ -1,11 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const Forum = ({ animate, setAnimate }) => {
   const [stepIndex, setStepIndex] = useState(0);
     const [serviceIndex, setServiceIndex] = useState(0);
     const [choiceIndex, setChoiceIndex] = useState(0);
+
+    interface ServiceOptionData {
+      capacity: number;
+      onNetMin: number;
+      offNetMin: number;
+      onNetSMS: number;
+      offNetSMS: number;
+      price: number;
+    }
+    
+    interface Service {
+      title: string;
+      description: string;
+      image: string;
+      optionText: string;
+      options?: string[];
+      optionsData?: ServiceOptionData[];
+      outerElement?: JSX.Element;
+    }
+    
+    interface Step {
+      title?: string;
+      description?: string;
+      child: () => JSX.Element;
+    }
   
-    const services = [
+    const services: Service[] = [
       {
         title: "Router (4G- 5G - custom of date)",
         description:
@@ -30,7 +55,7 @@ const Forum = ({ animate, setAnimate }) => {
           "Got it, so a mix of performance and price. What will you regularly use your phone for?",
         image: "icons/optical-fiber 1.svg",
         optionText: "Speed",
-        options: ["1", "2", "3"],
+        options: ['500 Speed', '200 Speed', '100 Speed'],
       },
       {
         title: "SIM (package) & number of lines",
@@ -38,6 +63,14 @@ const Forum = ({ animate, setAnimate }) => {
         image: "icons/simcard.svg",
         optionText: "Choose the best plan for you",
         optionsData: [
+          {
+            capacity: 100,
+            onNetMin: 2411,
+            offNetMin: 425,
+            onNetSMS: 5362,
+            offNetSMS: 632,
+            price: 2.62,
+          },
           {
             capacity: 100,
             onNetMin: 2411,
@@ -85,7 +118,7 @@ const Forum = ({ animate, setAnimate }) => {
       },
     ];
   
-    const steps = [
+    const steps : Step[] = [
       {
         title: "Tygo business",
         description:
@@ -130,7 +163,7 @@ const Forum = ({ animate, setAnimate }) => {
       },
     ];
     
-    const [innerComponent, setInnerComponent] = useState(null);
+    const [innerComponent, setInnerComponent] = useState(<></>);
   
     useEffect(() => {
       setInnerComponent(steps[stepIndex].child);
@@ -146,7 +179,7 @@ const Forum = ({ animate, setAnimate }) => {
                 <Indicators active={stepIndex} length={3} />
                 {innerComponent && (
                   <InnerContent
-                    {...steps[stepIndex]}
+                    step={steps[stepIndex]}
                     stepIndex={stepIndex}
                     setStepIndex={setStepIndex}
                     child={innerComponent}
@@ -156,7 +189,7 @@ const Forum = ({ animate, setAnimate }) => {
       </div>
     );
     }
-const CheckBox = ({ checked }) => {
+const CheckBox = ({ checked } : {checked: boolean}) => {
     return (
       <div className="checkbox">
         <div className={`checked ${checked ? "" : "hidden"}`}></div>
@@ -164,12 +197,12 @@ const CheckBox = ({ checked }) => {
     );
   };
   
-  const Services = ({ services, stepIndex, setStepIndex, setServiceIndex }) => {
-    const onStepIndexChange = (index) => {
+  const Services = ({ services, stepIndex, setStepIndex, setServiceIndex } : { services: Service[], stepIndex: number, setStepIndex: Dispatch<SetStateAction<number>>, setServiceIndex: Dispatch<SetStateAction<number>> }) => {
+    const onStepIndexChange = (index: number) => {
       setStepIndex(index);
     };
   
-    const onServiceIndexChange = (index) => {
+    const onServiceIndexChange = (index: number) => {
       setServiceIndex(index);
     };
   
@@ -205,8 +238,15 @@ const CheckBox = ({ checked }) => {
     setChoiceIndex,
     serviceIndex,
     services,
+  } : {
+    stepIndex: number,
+    setStepIndex: Dispatch<SetStateAction<number>>,
+    choiceIndex: number,
+    setChoiceIndex: Dispatch<SetStateAction<number>>,
+    serviceIndex: number,
+    services: Service[]
   }) => {
-    const OnChoiceClicked = (index) => {
+    const OnChoiceClicked = (index: number) => {
       setChoiceIndex(index);
     };
   
@@ -243,7 +283,7 @@ const CheckBox = ({ checked }) => {
             >
               {services[serviceIndex].optionsData.map((option, index) => (
                 <div
-                  className="option d-flex px-10 py-4 justify-content-evenly align-items-center w-100 fw-medium rounded-3"
+                  className="option d-flex p-4 align-items-center w-100 fw-medium rounded-3"
                   key={index}
                   onClick={() => {
                     OnChoiceClicked(index);
@@ -253,27 +293,27 @@ const CheckBox = ({ checked }) => {
                     <CheckBox checked={index == choiceIndex} />
                     <p>{option.capacity} GB</p>
                   </div>
-                  <div className="net d-flex flex-column align-items-start row-gap-2">
-                    <p className="netlabel">
+                  <div className="net">
+                    <div className="row">
+                    <p className="netlabel my-1 my-sm-0 text-center col-12 col-md-6">
                       ON-net min :{" "}
                       <span className="netvalue">{option.onNetMin}</span>
                     </p>
-                    <p className="netlabel">
+                    <p className="netlabel my-1 my-sm-0 text-center col-12 col-md-6">
                       OFF-net min :{" "}
                       <span className="netvalue">{option.offNetMin}</span>
                     </p>
-                  </div>
-                  <div className="net d-flex flex-column align-items-start row-gap-2">
-                    <p className="netlabel">
+                    <p className="netlabel my-1 my-sm-0 text-center col-12 col-md-6">
                       ON-net SMS :{" "}
                       <span className="netvalue">{option.onNetSMS}</span>
                     </p>
-                    <p className="netlabel">
+                    <p className="netlabel my-1 my-sm-0 text-center col-12 col-md-6">
                       OFF-net SMS :{" "}
                       <span className="netvalue">{option.offNetSMS}</span>
                     </p>
+                    </div>
                   </div>
-                  <div className="divider"></div>
+                  <div className="mx-4 divider"></div>
                   <p>{option.price} SR</p>
                 </div>
               ))}
@@ -291,11 +331,15 @@ const CheckBox = ({ checked }) => {
   };
   
   const InnerContent = ({
-    title,
-    description,
+    step,
     stepIndex,
     setStepIndex,
-    child,
+    child
+  }: {
+    step: Step,
+    stepIndex: number,
+    setStepIndex: Dispatch<SetStateAction<number>>,
+    child: JSX.Element
   }) => {
     return (
       <div className="content d-flex flex-column w-100 h-100">
@@ -312,10 +356,10 @@ const CheckBox = ({ checked }) => {
             }}
           />
         )}
-        {title != null && description != null ? (
+        {step.title != null && step.description != null ? (
           <div className="title">
-            <h1 className="fw-bold mb-2">{title}</h1>
-            <p>{description}</p>
+            <h1 className="fw-bold mb-2">{step.title}</h1>
+            <p>{step.description}</p>
           </div>
         ) : (
           <></>
@@ -325,8 +369,8 @@ const CheckBox = ({ checked }) => {
     );
   };
   
-  const Login = ({ stepIndex, setStepIndex }) => {
-    const OnFormSubmit = (event) => {
+  const Login = ({ stepIndex, setStepIndex } : {stepIndex: number, setStepIndex: Dispatch<SetStateAction<number>>}) => {
+    const OnFormSubmit = (event: any) => {
       event.preventDefault(); // Prevents the default form submission behavior
   
       // Perform any additional actions or validations here

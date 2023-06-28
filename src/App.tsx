@@ -16,8 +16,8 @@ function App() {
 
   return (
     <main>
-      <section className="contentwrapper container p-sm-0">
-        <div className="row">
+      <section className="contentwrapper container p-sm-0 vh-100">
+        <div className="row h-100">
           <div className="col-lg-6 col-12 p-0">
             <Forum animate={isAnimating} setAnimate={setIsAnimating}/>
           </div>
